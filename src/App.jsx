@@ -8,6 +8,7 @@ import Newsletter from './sections/Newsletter'
 import BotanicalVideo from './sections/BotanicalVideo'
 import GardenJournal from './sections/GardenJournal'
 import CustomCursor from './components/CustomCursor'
+import { ThemeProvider } from './context/ThemeContext'
 import SitePage from './pages/SitePage'
 import CartPage from './pages/CartPage'
 import ProductPage from './pages/ProductPage'
@@ -16,7 +17,7 @@ import { StoreProvider } from './context/StoreContext'
 const Foundation = () => <div className="min-h-screen overflow-hidden bg-ivory text-forest"><CustomCursor /><Navbar /><main><Hero /><BotanicalVideo /><BrandStory /><Categories /><FeaturedPlants /><GardenJournal /><Newsletter /></main></div>
 
 function App() {
-	return <StoreProvider><BrowserRouter><Routes>
+	return <ThemeProvider><StoreProvider><BrowserRouter><Routes>
 		<Route path="/" element={<Foundation />} />
 		<Route path="/shop" element={<><Navbar /><SitePage type="shop" /></>} />
 		<Route path="/collections" element={<><Navbar /><SitePage type="collections" /></>} />
@@ -25,7 +26,7 @@ function App() {
 		<Route path="/cart" element={<><Navbar /><CartPage /></>} />
 		<Route path="/product/:productId" element={<><Navbar /><ProductPage /></>} />
 		<Route path="*" element={<Foundation />} />
-	</Routes></BrowserRouter></StoreProvider>
+	</Routes></BrowserRouter></StoreProvider></ThemeProvider>
 }
 
 export default App

@@ -42,6 +42,7 @@ const Hero = () => {
 
   return (
     <section ref={sectionRef} id="home" onPointerMove={handlePointerMove} onPointerLeave={resetPointer} className="relative flex min-h-screen items-center overflow-hidden bg-linear-to-br from-ivory via-sage/45 to-[#dce8d7] pt-20">
+      <div className="grain-overlay pointer-events-none absolute inset-0 z-30 opacity-[0.06]" aria-hidden="true" />
       <BackgroundDecor parallaxX={useTransform(smoothX, [-1, 1], [-5, 5])} parallaxY={useTransform(smoothY, [-1, 1], [-4, 4])} />
       <motion.div style={{ left: glowX, top: glowY }} className="pointer-events-none absolute z-0 size-112 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#f6f1dd]/80 blur-3xl" />
       <FloatingLeaves parallaxX={leafX} />

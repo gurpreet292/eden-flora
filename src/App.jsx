@@ -14,10 +14,10 @@ import CartPage from './pages/CartPage'
 import ProductPage from './pages/ProductPage'
 import { StoreProvider } from './context/StoreContext'
 
-const Foundation = () => <div className="min-h-screen overflow-hidden bg-ivory text-forest"><CustomCursor /><Navbar /><main><Hero /><BotanicalVideo /><BrandStory /><Categories /><FeaturedPlants /><GardenJournal /><Newsletter /></main></div>
+const Foundation = () => <div className="min-h-screen overflow-hidden bg-ivory text-forest"><Navbar /><main><Hero /><BotanicalVideo /><BrandStory /><Categories /><FeaturedPlants /><GardenJournal /><Newsletter /></main></div>
 
 function App() {
-	return <ThemeProvider><StoreProvider><BrowserRouter><Routes>
+	return <ThemeProvider><StoreProvider><BrowserRouter><CustomCursor /><Routes>
 		<Route path="/" element={<Foundation />} />
 		<Route path="/shop" element={<><Navbar /><SitePage type="shop" /></>} />
 		<Route path="/collections" element={<><Navbar /><SitePage type="collections" /></>} />

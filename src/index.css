@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600;6..96,700&family=Inter:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
 
 @theme {
@@ -7,12 +7,12 @@
   --color-fern: #2f5d3a;
   --color-forest: #1b3a2a;
   --color-gold: #c7a86d;
-  --font-display: 'Cormorant Garamond', serif;
-  --font-body: 'Manrope', sans-serif;
+  --font-display: 'Bodoni Moda', serif;
+  --font-body: 'Inter', 'Segoe UI', sans-serif;
 }
 
 :root {
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-body);
   color: #1b3a2a;
   background: #f8f6ee;
   font-synthesis: none;
@@ -23,9 +23,39 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; min-width: 320px; }
+body { margin: 0; width: 100%; font-family: var(--font-body); }
+
+/* Keep the assistant response visually separate from the composer. */
+section.mt-5.rounded-2xl {
+  display: flex;
+  flex-direction: column;
+}
+
+section.mt-5.rounded-2xl > form { order: 1; }
+section.mt-5.rounded-2xl > p.mt-4 {
+  order: 2;
+  max-height: 12rem;
+  overflow-y: auto;
+  white-space: pre-line;
+  border: 1px solid rgb(47 93 58 / 0.1);
+  border-radius: 1rem;
+  background: rgb(238 244 234 / 0.72);
+  padding: 1rem;
+}
+
+/* Keep collection overview metrics close to the collection heading. */
+.mt-20.rounded-\[2rem\] {
+  display: flex;
+  flex-direction: column;
+}
+
+.mt-20.rounded-\[2rem\] > section.mt-8 { order: 1; }
+.mt-20.rounded-\[2rem\] > form.mt-8 { order: 2; }
+.mt-20.rounded-\[2rem\] > p.mt-3 { order: 3; }
+.mt-20.rounded-\[2rem\] > div.mt-7 { order: 4; }
+.mt-20.rounded-\[2rem\] > section.mt-5 { order: 5; }
 a { color: inherit; text-decoration: none; }
-button { font: inherit; }
+button { font-family: var(--font-body); font-weight: 500; }
 
 #root { transition: background-color 700ms ease, color 700ms ease; }
 .night-garden { background: #132b20; color: #f8f6ee; transition: background-color 700ms ease, color 700ms ease; }
@@ -34,6 +64,8 @@ button { font: inherit; }
 .night-garden .text-forest { color: #f8f6ee !important; }
 .night-garden .text-forest\/65, .night-garden .text-forest\/60, .night-garden .text-forest\/55, .night-garden .text-forest\/50, .night-garden .text-forest\/45 { color: rgb(248 246 238 / 0.68) !important; }
 .night-garden .border-forest\/10, .night-garden .border-forest\/15, .night-garden .border-forest\/20 { border-color: rgb(248 246 238 / 0.16) !important; }
+.night-garden header { background-color: rgb(19 43 32 / 0.88) !important; box-shadow: 0 1px 0 rgb(248 246 238 / 0.12); }
+.night-garden a.text-fern, .night-garden button.text-fern { color: #a9c995 !important; }
 
 @media (pointer: fine) {
   body { cursor: none; }
@@ -57,13 +89,125 @@ button { font: inherit; }
 .stem-loader { stroke-dasharray: 92; animation: stem-grow 1.8s ease-in-out infinite alternate; }
 
 .font-display {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: 'Bodoni Moda', Georgia, serif;
   font-kerning: normal;
   font-synthesis: none;
 }
 
 .tracking-label {
-  font-family: 'Manrope', Arial, sans-serif;
+  font-family: 'Inter', Arial, sans-serif;
   font-variant-ligatures: none;
   text-rendering: geometricPrecision;
 }
+
+@media (min-width: 1024px) {
+  .shop-sidebar { width: 100%; }
+}
+
+.py-24 { padding-block: 4rem; }
+.py-28 { padding-block: 5rem; }
+.pt-24 { padding-top: 3rem; }
+.mt-14 { margin-top: 2.5rem; }
+
+.vault-page, .passport-page { background: #f4f0e6; color: #1b3a2a; min-height: 100vh; }
+.vault-hero { position: relative; overflow: hidden; min-height: 660px; display: grid; align-items: end; background: #dce8da; }
+.vault-hero__inner { position: relative; z-index: 1; padding-bottom: 78px; }
+.vault-hero__parallax { position: absolute; inset: -12% 0; }
+.vault-eyebrow, .vault-kicker { display: flex; align-items: center; gap: 8px; margin: 0 0 22px; color: #5c7b5b; font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.vault-hero h1 { max-width: 850px; margin: 0; font: 600 clamp(4.3rem, 10vw, 9.5rem)/.78 'Cormorant Garamond', serif; letter-spacing: -.04em; }
+.vault-hero h1 em { color: #5c7b5b; font-weight: 400; }
+.vault-hero__copy { max-width: 465px; margin: 48px 0 0 16%; color: #416248; font-size: 14px; line-height: 1.8; }
+.vault-hero__rule { width: 100%; height: 1px; margin-top: 58px; background: #1b3a2a33; }
+.vault-leaves { position: absolute; inset: 0; pointer-events: none; }
+.vault-leaf { position: absolute; display: block; width: 34px; height: 58px; border: 1px solid #5c7b5b66; border-radius: 100% 0 100% 0; opacity: .55; }
+.vault-leaf::after { content: ''; position: absolute; left: 50%; top: 0; width: 1px; height: 100%; background: #5c7b5b66; transform: rotate(32deg); }
+.vault-intro, .vault-collection { padding: 120px 0; }
+.vault-intro__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8vw; align-items: end; margin-bottom: 76px; }
+.vault-intro h2, .vault-section-heading h2, .vault-pledge h2, .passport-body h2 { margin: 0; font: 600 clamp(3rem, 6vw, 5.8rem)/.86 'Cormorant Garamond', serif; letter-spacing: -.035em; }
+.vault-intro h2 i, .vault-section-heading h2 i, .vault-pledge h2 i, .passport-body h2 i { color: #6e8f6e; font-weight: 400; }
+.vault-lede { max-width: 430px; font: 400 24px/1.35 'Cormorant Garamond', serif; }
+.vault-muted { color: #78907b; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+.vault-map { position: relative; min-height: 530px; overflow: hidden; border: 1px solid #1b3a2a1f; background: #e7eee4; box-shadow: 0 24px 50px #1b3a2a0d; }
+.vault-map__svg { position: absolute; inset: 7% 5%; width: 90%; height: 82%; opacity: .85; }
+.map-land { fill: #aac2a3; stroke: #719271; stroke-width: .25; }
+.map-countries path { fill: #aac2a3; stroke: #719271; stroke-width: 1.2; vector-effect: non-scaling-stroke; transition: fill .25s ease; }
+.map-countries path:hover { fill: #bfd2b9; }
+.map-line { fill: none; stroke: #a0b79d; stroke-width: .2; stroke-dasharray: 1 1; }
+.map-travel-line { fill: none; stroke: #b18a50; stroke-width: .28; stroke-dasharray: 1.2 1.2; opacity: .8; animation: travel-line 8s linear infinite; }
+.map-pin { position: absolute; z-index: 2; display: flex; align-items: center; gap: 5px; border: 0; color: #315f3a; background: transparent; font-size: 10px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; transform: translate(-50%, -50%); }
+.map-pin svg { padding: 4px; width: 27px; height: 27px; border-radius: 50%; color: #f4f0e6; background: #3c6d48; box-shadow: 0 0 0 6px #3c6d4826; transition: .3s ease; }
+.map-pin svg { animation: pin-pulse 3s ease-in-out infinite; }
+.map-pin:hover svg, .map-pin.is-selected svg { background: #b18a50; box-shadow: 0 0 0 10px #b18a5026; transform: scale(1.15); }
+.vault-map__caption { position: absolute; bottom: 24px; left: 28px; display: flex; align-items: center; gap: 10px; color: #719271; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+.map-legend-dot { width: 7px; height: 7px; border-radius: 50%; background: #b18a50; }
+.vault-section-heading { display: flex; justify-content: space-between; align-items: end; margin-bottom: 44px; }
+.vault-controls { display: flex; justify-content: space-between; gap: 20px; margin-bottom: 44px; padding: 15px 0; border-block: 1px solid #1b3a2a1f; }
+.vault-search { display: flex; align-items: center; gap: 12px; color: #6e8f6e; }
+.vault-search input { width: 210px; border: 0; outline: 0; color: #1b3a2a; background: transparent; font: 14px 'Cormorant Garamond', serif; }
+.vault-search input::placeholder { color: #78907b; }
+.vault-filters { display: flex; align-items: center; gap: 8px; color: #78907b; }
+.vault-filters select { max-width: 130px; padding: 8px 24px 8px 0; border: 0; color: #315f3a; background: transparent; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; outline: 0; }
+.vault-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.vault-card { overflow: hidden; border: 1px solid #1b3a2a14; border-radius: 3px; background: #faf8f0cc; box-shadow: 0 15px 40px #1b3a2a0a; }
+.vault-card__image-wrap { position: relative; height: 360px; overflow: hidden; background: #dbe5d8; }
+.vault-card__image { width: 100%; height: 100%; object-fit: cover; filter: saturate(.75); transition: transform .8s ease, filter .8s ease; }
+.vault-card:hover .vault-card__image { transform: scale(1.06); filter: saturate(1); }
+.vault-card__index, .vault-card__status { position: absolute; top: 18px; color: #faf8f0; font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; text-shadow: 0 1px 10px #0008; }
+.vault-card__index { left: 18px; }.vault-card__status { right: 18px; }
+.vault-card__body { padding: 24px; }.vault-card__body h3 { margin: 7px 0 2px; font: 600 32px/.9 'Cormorant Garamond', serif; }.vault-scientific { margin: 0; color: #78907b; font: italic 15px 'Cormorant Garamond', serif; }.vault-card__story { min-height: 65px; margin: 22px 0; color: #56735b; font-size: 12px; line-height: 1.65; }
+.vault-card .vault-kicker { margin-bottom: 0; font-size: 9px; }.vault-text-button, .vault-error button { display: inline-flex; align-items: center; gap: 8px; padding: 0; border: 0; color: #315f3a; background: transparent; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }.vault-text-button { margin-top: 22px; }.vault-text-button:hover { color: #b18a50; }
+.rarity-meter { margin-top: 30px; }.rarity-meter__label { display: flex; justify-content: space-between; margin-bottom: 9px; color: #78907b; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }.rarity-meter__label strong { color: #315f3a; }.rarity-meter__track { height: 3px; overflow: hidden; background: #315f3a1f; }.rarity-meter__track span { display: block; height: 100%; background: #b18a50; }.rarity-meter-compact { margin-top: 0; }.rarity-meter-compact .rarity-meter__label { margin-bottom: 7px; }
+.vault-skeleton { height: 570px; border-radius: 3px; background: linear-gradient(100deg, #e2e8de 25%, #edf0e8 45%, #e2e8de 65%); background-size: 300% 100%; animation: vault-shimmer 1.5s infinite; }.vault-error, .vault-empty { padding: 70px 20px; text-align: center; color: #56735b; }.vault-error button { padding: 14px 20px; border: 1px solid #315f3a55; }.vault-pledge { padding: 120px 0 160px; color: #f4f0e6; background: #264d35; }.vault-pledge p:last-child { max-width: 370px; margin: 38px 0 0 50%; color: #c5d5c5; font-size: 13px; line-height: 1.8; }
+.passport-page { position: relative; padding: 150px 0 100px; overflow: hidden; }.passport-back { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 32px; color: #56735b; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; }.passport-sheet { position: relative; max-width: 980px; margin: auto; padding: 30px 48px 48px; border: 1px solid #b18a5066; outline: 1px solid #b18a5033; outline-offset: 7px; background: #faf8f0; box-shadow: 0 30px 70px #1b3a2a14; }.passport-sheet__top { display: flex; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid #1b3a2a1f; color: #78907b; font-size: 9px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }.passport-sheet__top strong { color: #b18a50; }.passport-sheet__hero { display: grid; grid-template-columns: 1fr 260px; gap: 48px; align-items: center; padding: 60px 0; }.passport-sheet__hero h1 { margin: 0 0 5px; font: 600 clamp(3.4rem, 7vw, 6.5rem)/.8 'Cormorant Garamond', serif; }.passport-sheet__hero img { width: 100%; height: 300px; object-fit: cover; filter: saturate(.7); }.passport-facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; padding: 24px 0; border-block: 1px solid #1b3a2a1f; }.passport-facts div { display: flex; gap: 10px; color: #6e8f6e; font-size: 10px; text-transform: uppercase; letter-spacing: .1em; }.passport-facts span { display: grid; gap: 6px; }.passport-facts strong { color: #315f3a; font-size: 12px; letter-spacing: 0; text-transform: none; }.passport-body { display: grid; grid-template-columns: .8fr 1fr; gap: 80px; padding: 70px 0; }.passport-body h2 { font-size: 52px; }.passport-body p { margin: 0 0 17px; color: #56735b; font-size: 13px; line-height: 1.75; }.passport-body strong { color: #315f3a; }.passport-timeline { padding: 28px 0 60px; }.timeline-line { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #b18a50; }.timeline-line div { position: relative; padding-top: 22px; }.timeline-line div::before { content: ''; position: absolute; top: -5px; left: 0; width: 9px; height: 9px; border: 2px solid #b18a50; border-radius: 50%; background: #faf8f0; }.timeline-line span { color: #b18a50; font: 24px 'Cormorant Garamond', serif; }.timeline-line p { margin: 5px 0; color: #78907b; font-size: 10px; text-transform: uppercase; letter-spacing: .1em; }.passport-note { max-width: 650px; padding: 28px 0; border-top: 1px solid #1b3a2a1f; }.passport-note blockquote { margin: 10px 0 30px; color: #315f3a; font: italic 29px/1.2 'Cormorant Garamond', serif; }.passport-fact { color: #78907b; font-size: 12px; }.passport-seal { margin: 45px auto 0; display: grid; place-items: center; width: 74px; height: 74px; border: 1px solid #b18a50; border-radius: 50%; color: #b18a50; font-size: 10px; letter-spacing: .1em; }.passport-seal span { font-size: 15px; }.passport-loading, .passport-error { padding: 100px 0; text-align: center; }.passport-error a { color: #315f3a; text-decoration: underline; }
+/* Vault enhancements */
+.map-pin__popup { position: absolute; bottom: 28px; left: 50%; display: grid; gap: 5px; width: 170px; padding: 13px; border: 1px solid #b18a5044; border-radius: 3px; opacity: 0; pointer-events: none; color: #315f3a; background: #faf8f0f2; box-shadow: 0 15px 30px #1b3a2a1a; text-align: left; text-transform: none; transform: translateX(-50%) translateY(7px); transition: .25s ease; }
+.map-pin:hover .map-pin__popup, .map-pin.is-selected .map-pin__popup { opacity: 1; transform: translateX(-50%) translateY(0); }.map-pin__popup { grid-template-columns: 52px 1fr; align-items: center; gap: 10px; }.map-pin__popup img { width: 52px; height: 52px; border-radius: 2px; object-fit: cover; filter: saturate(.75); }.map-pin__popup-copy { display: grid; gap: 5px; }.map-pin__popup strong { font: 600 18px/.95 'Cormorant Garamond', serif; }.map-pin__popup small { color: #78907b; font-size: 9px; line-height: 1.4; letter-spacing: .08em; text-transform: uppercase; }
+.vault-heading-actions { display: grid; justify-items: end; gap: 18px; }.vault-discover { display: inline-flex; align-items: center; gap: 9px; padding: 12px 15px; border: 1px solid #b18a5080; border-radius: 2px; color: #315f3a; background: transparent; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; transition: .25s ease; }.vault-discover:hover { color: #faf8f0; background: #315f3a; }
+.vault-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-bottom: 44px; border-block: 1px solid #1b3a2a1f; background: #1b3a2a1f; }.vault-stats div { display: grid; gap: 7px; padding: 22px 18px; background: #f4f0e6; }.vault-stats strong { color: #b18a50; font: 500 42px/.8 'Cormorant Garamond', serif; }.vault-stats span { color: #78907b; font-size: 9px; letter-spacing: .13em; text-transform: uppercase; }
+.passport-qr { display: flex; align-items: center; gap: 10px; margin-top: 13px; color: #78907b; font-size: 8px; letter-spacing: .1em; text-transform: uppercase; }.passport-qr canvas { width: 58px !important; height: 58px !important; }
+.curator-panel { margin-top: 50px; padding: 25px; border: 1px solid #b18a5066; background: #e7eee499; }.curator-panel__heading { display: flex; align-items: center; gap: 13px; }.curator-icon { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; color: #faf8f0; background: #315f3a; }.curator-panel .vault-kicker { margin: 0 0 4px; }.curator-panel h2 { margin: 0; font: 500 30px/.8 'Cormorant Garamond', serif; }.curator-answer { min-height: 45px; margin: 25px 0; color: #56735b; font-size: 12px; line-height: 1.6; }.curator-form { display: flex; border-bottom: 1px solid #315f3a66; }.curator-form input { flex: 1; min-width: 0; padding: 10px 0; border: 0; outline: 0; color: #315f3a; background: transparent; font: 14px 'Cormorant Garamond', serif; }.curator-form button { display: grid; place-items: center; width: 34px; border: 0; color: #315f3a; background: transparent; }
+@keyframes vault-shimmer { to { background-position: -300% 0; } }
+@keyframes pin-pulse { 50% { box-shadow: 0 0 0 11px #3c6d4810, 0 0 20px #b18a5066; } }
+@media (max-width: 800px) { .vault-hero { min-height: 570px; }.vault-hero__copy { margin-left: 0; }.vault-intro__grid, .passport-body { grid-template-columns: 1fr; gap: 34px; }.vault-map { min-height: 430px; }.vault-grid { grid-template-columns: repeat(2, 1fr); }.vault-card__image-wrap { height: 280px; }.vault-controls { display: grid; }.vault-filters { flex-wrap: wrap; }.passport-sheet { padding: 24px; }.passport-sheet__hero { grid-template-columns: 1fr; }.passport-sheet__hero img { height: 240px; order: -1; }.passport-facts { grid-template-columns: repeat(2, 1fr); }.passport-body h2 { font-size: 45px; } }
+@media (max-width: 520px) { .vault-intro, .vault-collection { padding: 80px 0; }.vault-section-heading { display: block; }.vault-section-heading .vault-muted { margin-top: 24px; }.vault-grid { grid-template-columns: 1fr; }.vault-card__image-wrap { height: 340px; }.vault-hero h1 { font-size: 4.6rem; }.vault-map__caption { font-size: 8px; }.map-pin span { display: none; }.map-pin { transform: translate(-50%, -50%) scale(.9); }.passport-page { padding-top: 120px; }.passport-sheet__hero { padding: 40px 0; }.passport-facts { grid-template-columns: 1fr 1fr; }.passport-facts div { font-size: 8px; }.passport-facts strong { font-size: 10px; } }
+
+@media (max-width: 800px) { .vault-stats { grid-template-columns: repeat(2, 1fr); } .vault-heading-actions { justify-items: start; margin-top: 22px; } }
+
+/* Collectible card and passport preview */
+.vault-card { min-height: 610px; perspective: 1200px; background: transparent; box-shadow: none; border: 0; }
+.vault-card__inner { position: relative; width: 100%; height: 100%; min-height: 610px; transform-style: preserve-3d; transition: transform .75s cubic-bezier(.2,.7,.2,1); }
+.vault-card.is-flipped .vault-card__inner { transform: rotateY(180deg); }
+.vault-card__face { position: absolute; inset: 0; overflow: hidden; backface-visibility: hidden; border: 1px solid #1b3a2a14; border-radius: 3px; background: #faf8f0; box-shadow: 0 15px 40px #1b3a2a0a; }
+.vault-card__front { transform: rotateY(0); }.vault-card__back { padding: 25px; transform: rotateY(180deg); background: #e7eee4; }
+.vault-card__badge { position: absolute; top: 18px; right: 18px; padding: 7px 9px; border: 1px solid #faf8f0aa; border-radius: 2px; color: #faf8f0; background: #315f3acc; font-size: 9px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; overflow: hidden; }
+.vault-card__badge::after { content: ''; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, #faf8f088 50%, transparent 70%); transform: translateX(-130%); animation: badge-shimmer 4s ease-in-out infinite; }
+.vault-card__status-row { display: flex; align-items: center; gap: 9px; margin-top: 20px; color: #56735b; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.vault-flag { display: grid; place-items: center; width: 25px; height: 20px; border: 1px solid #b18a5080; color: #b18a50; font-size: 8px; letter-spacing: 0; }
+.vault-card__back-head { display: flex; justify-content: space-between; margin-bottom: 70px; color: #b18a50; font-size: 10px; font-weight: 700; letter-spacing: .15em; }
+.vault-card__back h3 { margin: 0 0 15px; font: 600 36px/.9 'Cormorant Garamond', serif; }
+.vault-card__back .vault-card__story { min-height: auto; margin: 0 0 26px; color: #315f3a; font: 20px/1.2 'Cormorant Garamond', serif; }
+.vault-card__history { display: grid; gap: 14px; padding: 18px 0; border-block: 1px solid #315f3a2b; }.vault-card__history span { display: grid; gap: 4px; color: #78907b; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; }.vault-card__history strong { color: #315f3a; font-size: 12px; letter-spacing: 0; text-transform: none; }
+.passport-preview-backdrop { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 24px; background: #1b3a2acc; backdrop-filter: blur(8px); }
+.passport-preview { position: relative; display: grid; grid-template-columns: 220px 1fr; width: min(720px, 100%); overflow: hidden; border: 1px solid #b18a5080; border-radius: 3px; background: #faf8f0; box-shadow: 0 30px 90px #0005; }
+.passport-preview__close { position: absolute; z-index: 2; top: 14px; right: 14px; display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid #faf8f088; border-radius: 50%; color: #faf8f0; background: #1b3a2a88; }
+.passport-preview__image { position: relative; min-height: 430px; }.passport-preview__image img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.78); }.passport-preview__image span { position: absolute; left: 18px; bottom: 18px; color: #faf8f0; font-size: 9px; font-weight: 700; letter-spacing: .16em; }
+.passport-preview__content { padding: 38px; }.passport-preview__content h2 { margin: 0 0 4px; font: 600 46px/.85 'Cormorant Garamond', serif; }.passport-preview__content .vault-kicker { margin-bottom: 17px; }.passport-preview__facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 30px; padding: 18px 0; border-block: 1px solid #1b3a2a1f; }.passport-preview__facts span { display: grid; gap: 5px; color: #78907b; font-size: 8px; letter-spacing: .1em; text-transform: uppercase; }.passport-preview__facts strong { color: #315f3a; font-size: 11px; letter-spacing: 0; text-transform: none; }.passport-preview__note { color: #56735b; font: 22px/1.2 'Cormorant Garamond', serif; }.passport-preview__footer { display: flex; justify-content: space-between; align-items: end; margin-top: 25px; }
+@keyframes badge-shimmer { 50%, 70% { transform: translateX(130%); } }
+@media (max-width: 640px) { .vault-card, .vault-card__inner { min-height: 590px; }.passport-preview { grid-template-columns: 1fr; max-height: 90vh; overflow: auto; }.passport-preview__image { min-height: 230px; height: 230px; }.passport-preview__content { padding: 25px; }.passport-preview__content h2 { font-size: 40px; } }
+
+@media (min-width: 640px) {
+  .sm\:py-32 { padding-block: 6rem; }
+  .sm\:py-40 { padding-block: 7rem; }
+  .sm\:pt-32 { padding-top: 4rem; }
+}
+
+/* Living museum hero details */
+.vault-hero::before { content: 'VAULT NO. 001  /  LIVING ARCHIVE  /  EST. 2026'; position: absolute; z-index: 1; top: 112px; right: max(24px, calc((100vw - 1200px) / 2)); color: #5c7b5b; font-size: 9px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+.vault-hero::after { content: '28.6139 N  /  77.2090 E     SPECIMEN CHAMBER / 01'; position: absolute; z-index: 1; right: max(24px, calc((100vw - 1200px) / 2)); bottom: 104px; color: #5c7b5b; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
+.vault-hero__parallax { background-image: linear-gradient(#5c7b5b16 1px, transparent 1px), linear-gradient(90deg, #5c7b5b16 1px, transparent 1px); background-position: center; background-size: 12vw 12vw; }
+.vault-hero__parallax::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 68% 42%, #faf8f044 0, transparent 34%), linear-gradient(115deg, transparent 40%, #b18a5010 40.2%, transparent 40.4%); pointer-events: none; }
+.vault-hero__rule { position: relative; }
+.vault-hero__rule::after { content: 'SCROLL TO EXPLORE'; position: absolute; right: 0; top: 22px; color: #5c7b5b; font-size: 8px; font-weight: 700; letter-spacing: .2em; animation: vault-scroll-pulse 2.4s ease-in-out infinite; }
+@keyframes vault-scroll-pulse { 50% { opacity: .35; transform: translateY(5px); } }
+@keyframes travel-line { to { stroke-dashoffset: -24; } }
+@media (max-width: 520px) { .vault-hero::before { top: 92px; right: 20px; font-size: 8px; }.vault-hero::after { bottom: 82px; right: 20px; font-size: 7px; }.vault-hero__parallax { background-size: 24vw 24vw; }.vault-hero__rule::after { top: 20px; font-size: 7px; } }

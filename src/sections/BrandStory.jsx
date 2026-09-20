@@ -38,7 +38,7 @@ const BrandStory = () => {
 					<motion.div initial={{ opacity: 0, x: 18 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 1.1, ease }} className="relative z-10 order-2 lg:order-2 lg:-ml-16">
 						<div className="absolute -left-8 -top-12 hidden text-gold/30 sm:block"><Leaf size={42} strokeWidth={0.7} className="rotate-[-35deg]" /></div>
 						<div className="relative overflow-visible rounded-[1rem_8rem_1rem_8rem] bg-sage p-2 shadow-[18px_28px_55px_rgba(27,58,42,0.12)] sm:p-3">
-							<motion.div style={{ y: imageY }} className="relative aspect-[0.92] overflow-hidden rounded-[0.75rem_7.5rem_0.75rem_7.5rem] bg-[#d8e3d1]"><img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1200&q=85" alt="Sunlit greenhouse filled with lush botanical plants" className="h-full w-full object-cover" /><div className="absolute inset-0 bg-linear-to-t from-forest/15 via-transparent to-ivory/10" /></motion.div>
+								<motion.div style={{ y: imageY }} className="relative aspect-[0.92] overflow-hidden rounded-[0.75rem_7.5rem_0.75rem_7.5rem] bg-[#d8e3d1]"><img src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=1200&q=85" alt="Sunlit greenhouse filled with lush botanical plants" className="h-full w-full object-cover" /><div className="absolute inset-0 bg-linear-to-t from-forest/15 via-transparent to-ivory/10" /></motion.div>
 							<span className="absolute -bottom-5 left-1/4 h-px w-24 rotate-[-16deg] bg-gold/60" />
 						</div>
 						<QuoteCard />

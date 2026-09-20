@@ -1,5 +1,23 @@
 # React + Vite
 
+## Backend
+
+The project now includes an Express API backed by MongoDB.
+
+1. Copy `.env.example` to `.env`.
+2. Set `MONGODB_URI` to your MongoDB Atlas connection string and keep the file private.
+3. Start the API with `npm run server`.
+4. Start the frontend separately with `npm run dev`.
+
+The API runs on `http://localhost:5000` and exposes:
+
+- `GET /api/health` - MongoDB connection check
+- `GET /api/products` - product catalog, seeded on first request
+- `GET /api/products/:id` - one product
+- `POST /api/orders` - create an order with `customer` and `items`
+
+The Vite development server proxies `/api` requests to the backend. The MongoDB password must only exist in `.env`; never commit it or place it in React code.
+
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
 Currently, two official plugins are available:

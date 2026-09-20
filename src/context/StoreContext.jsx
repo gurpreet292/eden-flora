@@ -16,7 +16,8 @@ export const StoreProvider = ({ children }) => {
   })
   const updateQuantity = (id, quantity) => setCart((items) => quantity < 1 ? items.filter((item) => item.id !== id) : items.map((item) => item.id === id ? { ...item, quantity } : item))
   const removeFromCart = (id) => setCart((items) => items.filter((item) => item.id !== id))
-  const value = useMemo(() => ({ cart, addToCart, updateQuantity, removeFromCart, itemCount: cart.reduce((total, item) => total + item.quantity, 0), subtotal: cart.reduce((total, item) => total + item.price * item.quantity, 0) }), [cart])
+  const clearCart = () => setCart([])
+  const value = useMemo(() => ({ cart, addToCart, updateQuantity, removeFromCart, clearCart, itemCount: cart.reduce((total, item) => total + item.quantity, 0), subtotal: cart.reduce((total, item) => total + item.price * item.quantity, 0) }), [cart])
 
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>
 }

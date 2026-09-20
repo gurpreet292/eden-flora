@@ -14,7 +14,7 @@ const MagneticButton = ({ children, href = '#', className = '' }) => {
 
   const reset = () => { if (buttonRef.current) buttonRef.current.style.transform = '' }
 
-  return <a ref={buttonRef} href={href} onMouseMove={handleMove} onMouseLeave={reset} className={`group inline-flex items-center gap-4 rounded-full bg-forest px-6 py-3.5 text-sm font-semibold text-ivory shadow-[0_10px_24px_rgba(27,58,42,0.16)] transition-[transform,background-color,box-shadow] duration-300 hover:bg-fern hover:shadow-[0_14px_30px_rgba(27,58,42,0.25)] ${className}`}>
+  return <a ref={buttonRef} href={href} onMouseMove={handleMove} onMouseLeave={reset} style={{ color: '#f8f6ee' }} className={`group inline-flex items-center gap-4 rounded-full bg-forest px-6 py-3.5 text-sm font-medium text-ivory shadow-[0_10px_24px_rgba(27,58,42,0.16)] transition-[transform,background-color,box-shadow] duration-300 hover:bg-fern hover:shadow-[0_14px_30px_rgba(27,58,42,0.25)] ${className}`}>
     {children}
     <ArrowUpRight size={16} strokeWidth={1.5} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
   </a>

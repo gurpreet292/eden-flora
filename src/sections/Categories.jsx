@@ -6,7 +6,7 @@ import SectionTitle from '../components/SectionTitle'
 
 const categories = [
   { title: 'Low light', subtitle: 'Quiet corners', image: 'photo-1509423350716-97f9360b4e09' },
-  { title: 'Statement', subtitle: 'A little drama', image: 'photo-1614594975525-e45190c55d0b' },
+  { title: 'Statement', subtitle: 'A little drama', image: 'photo-1593691509543-c55fb32e5cee' },
   { title: 'Small rituals', subtitle: 'Desk companions', image: 'photo-1485955900006-10f4d324d411' },
 ]
 

@@ -41,27 +41,28 @@ const Hero = () => {
   }
 
   return (
-    <section ref={sectionRef} id="home" onPointerMove={handlePointerMove} onPointerLeave={resetPointer} className="relative flex min-h-screen items-center overflow-hidden bg-linear-to-br from-ivory via-sage/45 to-[#dce8d7] pt-20">
+    <section ref={sectionRef} id="home" onPointerMove={handlePointerMove} onPointerLeave={resetPointer} className="relative flex min-h-[100svh] items-center overflow-hidden bg-linear-to-br from-ivory via-sage/45 to-[#dce8d7] pt-20">
       <div className="grain-overlay pointer-events-none absolute inset-0 z-30 opacity-[0.06]" aria-hidden="true" />
       <BackgroundDecor parallaxX={useTransform(smoothX, [-1, 1], [-5, 5])} parallaxY={useTransform(smoothY, [-1, 1], [-4, 4])} />
       <motion.div style={{ left: glowX, top: glowY }} className="pointer-events-none absolute z-0 size-112 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#f6f1dd]/80 blur-3xl" />
       <FloatingLeaves parallaxX={leafX} />
 
-      <Container className="relative z-20 grid min-h-[calc(100vh-5rem)] items-center gap-12 py-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-6 lg:py-20">
-        <motion.div className="relative z-20 max-w-xl" initial="hidden" animate="visible" variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.16, delayChildren: 0.25 } } }}>
+      <Container className="relative z-20 grid items-center gap-12 py-12 sm:py-16 lg:min-h-[calc(100svh-5rem)] lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-10 lg:py-12">
+        <motion.div className="relative z-20 max-w-xl lg:max-w-2xl" initial="hidden" animate="visible" variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.16, delayChildren: 0.25 } } }}>
           <motion.p variants={{ hidden: { opacity: 0, y: 14 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease } } }} className="tracking-label mb-7 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.28em] text-gold"><span className="h-px w-8 bg-gold" />Thoughtfully grown</motion.p>
-          <h1 className="font-display text-[clamp(4rem,8vw,7.5rem)] leading-[0.8] tracking-[-0.03em] text-forest">
+          <h1 className="font-display text-[clamp(3.75rem,7vw,7.5rem)] leading-[0.84] tracking-[-0.03em] text-forest">
             <motion.span className="block" variants={revealLine}>Bring the</motion.span>
             <motion.span className="block" variants={revealLine}><em className="font-normal text-fern">outside</em> in.</motion.span>
           </h1>
           <motion.p variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease } } }} className="mt-8 max-w-sm text-sm leading-7 text-forest/65">Curated botanicals for considered spaces. Discover a slower, greener way to live beautifully.</motion.p>
           <motion.div variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease } } }} className="mt-9 flex flex-wrap items-center gap-4">
             <MagneticButton href="#shop">Explore the collection</MagneticButton>
-            <a href="#story" className="group inline-flex items-center gap-3 rounded-full border border-forest/25 px-5 py-3.5 text-sm font-semibold text-forest transition-all duration-300 hover:-translate-y-1 hover:border-fern hover:bg-ivory/50"><span>Our philosophy</span><span className="text-fern transition-transform duration-300 group-hover:translate-x-1">→</span></a>
+            <a href="#story" className="group inline-flex items-center gap-3 rounded-full border border-forest/25 px-5 py-3.5 text-sm font-medium text-forest transition-all duration-300 hover:-translate-y-1 hover:border-fern hover:bg-ivory/50"><span>Our philosophy</span><span className="text-fern transition-transform duration-300 group-hover:translate-x-1">→</span></a>
+            <a href="#test-drive" className="text-xs font-bold uppercase tracking-[0.16em] text-fern underline-offset-4 hover:underline">Test every feature</a>
           </motion.div>
         </motion.div>
 
-        <motion.div style={{ x: imageX, y: imageY }} initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.3, delay: 0.35, ease }} className="relative mx-auto w-full max-w-155 lg:ml-auto">
+        <motion.div style={{ x: imageX, y: imageY }} initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.3, delay: 0.35, ease }} className="relative mx-auto w-full max-w-175 lg:ml-auto lg:max-w-none">
           <LeafFrame />
           <motion.div animate={{ rotate: [0, 1.2, 0], scale: [1, 1.012, 1] }} transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }} className="absolute -right-4 top-1/4 size-24 rounded-full border border-gold/40 sm:-right-10 sm:size-36" />
           <div className="relative aspect-[0.92] overflow-hidden rounded-[10rem_10rem_1rem_1rem] bg-[#d7e2d0] shadow-[20px_30px_60px_rgba(27,58,42,0.14)] transition-transform duration-700 hover:scale-[1.012]">

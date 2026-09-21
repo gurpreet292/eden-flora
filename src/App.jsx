@@ -26,7 +26,6 @@ import OrderConfirmedPage from './pages/OrderConfirmedPage'
 import PublicProjectPage from './pages/PublicProjectPage'
 import { StoreProvider } from './context/StoreContext'
 import { AuthProvider } from './context/AuthContext'
-import GeminiProjectTools from './components/GeminiProjectTools'
 
 const Foundation = () => <div className="min-h-screen overflow-hidden bg-ivory text-forest"><Navbar /><main><Hero /><BotanicalVideo /><BrandStory /><Categories /><FeaturedPlants /><GardenJournal /><BloomGallery /><TestimonialsSocial /><Newsletter /></main></div>
 
@@ -34,7 +33,7 @@ function App() {
 	return <ThemeProvider><AuthProvider><StoreProvider><BrowserRouter><ScrollToTop /><CustomCursor /><Routes>
 		<Route path="/" element={<Foundation />} />
 		<Route path="/shop" element={<><Navbar /><SitePage type="shop" /></>} />
-		<Route path="/collections" element={<><Navbar /><div className="pt-20"><GeminiProjectTools /></div><SitePage type="collections" /></>} />
+		<Route path="/collections" element={<><Navbar /><SitePage type="collections" /></>} />
 		<Route path="/about" element={<><Navbar /><SitePage type="about" /></>} />
 		<Route path="/contact" element={<><Navbar /><SitePage type="contact" /></>} />
 		<Route path="/cart" element={<><Navbar /><CartPage /></>} />

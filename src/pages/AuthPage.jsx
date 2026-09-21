@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ArrowRight, Leaf, LockKeyhole, Mail, Sparkles } from 'lucide-react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import api from '../utils/api'
 
 const initialForm = { name: '', email: '', password: '', confirmPassword: '' }
 
@@ -48,7 +48,7 @@ const AuthPage = ({ mode = 'login' }) => {
     try {
       const endpoint = isRegister ? '/api/auth/register' : '/api/auth/login'
       const payload = isRegister ? { name: form.name, email: form.email, password: form.password } : { email: form.email, password: form.password }
-      const response = await axios.post(endpoint, payload)
+      const response = await api.post(endpoint, payload)
 
       localStorage.setItem('eden-flora-user', JSON.stringify(response.data.user))
       window.dispatchEvent(new Event('auth:updated'))

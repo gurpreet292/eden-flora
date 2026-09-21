@@ -11,9 +11,11 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await api.get('/api/auth/me')
       setUser(response.data.user)
+      localStorage.setItem('eden-flora-user', JSON.stringify(response.data.user))
       return response.data.user
     } catch {
       setUser(null)
+      localStorage.removeItem('eden-flora-user')
       return null
     } finally {
       setIsLoading(false)
@@ -41,6 +43,7 @@ export const AuthProvider = ({ children }) => {
       await api.post('/api/auth/logout')
     } finally {
       setUser(null)
+      localStorage.removeItem('eden-flora-user')
       window.dispatchEvent(new Event('auth:updated'))
     }
   }

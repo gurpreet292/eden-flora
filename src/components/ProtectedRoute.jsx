@@ -1,30 +1,21 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
-
-const getStoredAuth = () => {
-  try {
-    const user = localStorage.getItem('eden-flora-user')
-    return Boolean(user)
-  } catch {
-    return false
-  }
-}
+import { useAuth } from '../context/AuthContext'
 
 const ProtectedRoute = ({ children }) => {
   const location = useLocation()
-  const [isAuthenticated, setIsAuthenticated] = useState(getStoredAuth)
+  const { user, isLoading } = useAuth()
 
   useEffect(() => {
-    const syncAuthState = () => setIsAuthenticated(getStoredAuth())
-    window.addEventListener('auth:updated', syncAuthState)
-    window.addEventListener('storage', syncAuthState)
-    return () => {
-      window.removeEventListener('auth:updated', syncAuthState)
-      window.removeEventListener('storage', syncAuthState)
-    }
-  }, [])
+    if (user) localStorage.setItem('eden-flora-user', JSON.stringify(user))
+    else if (!isLoading) localStorage.removeItem('eden-flora-user')
+  }, [isLoading, user])
 
-  if (!isAuthenticated) {
+  if (isLoading) {
+    return <div className="grid min-h-screen place-items-center bg-ivory text-sm text-forest/60">Checking your session...</div>
+  }
+
+  if (!user) {
     return <Navigate to="/login" replace state={{ from: location.pathname }} />
   }
 

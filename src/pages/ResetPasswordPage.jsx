@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { ArrowRight, CheckCircle2, Eye, EyeOff, KeyRound, Mail, ShieldCheck } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
-import axios from 'axios'
+import api from '../utils/api'
 
 const ResetPasswordPage = () => {
   const location = useLocation()
@@ -30,7 +30,7 @@ const ResetPasswordPage = () => {
     setIsLoading(true)
 
     try {
-      const response = await axios.post('/api/auth/request-reset', { email })
+      const response = await api.post('/api/auth/request-reset', { email })
       setMessage(response.data.message)
       setEmail('')
     } catch (requestError) {
@@ -63,7 +63,7 @@ const ResetPasswordPage = () => {
     setIsLoading(true)
 
     try {
-      const response = await axios.post('/api/auth/reset-password', { token: tokenFromUrl, password })
+      const response = await api.post('/api/auth/reset-password', { token: tokenFromUrl, password })
       setMessage(response.data.message)
       setPassword('')
       setConfirmPassword('')

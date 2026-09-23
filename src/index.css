@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600;6..96,700&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
 
 @theme {
@@ -7,8 +7,8 @@
   --color-fern: #2f5d3a;
   --color-forest: #1b3a2a;
   --color-gold: #c7a86d;
-  --font-display: 'Bodoni Moda', serif;
-  --font-body: 'Inter', 'Segoe UI', sans-serif;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', 'Segoe UI', sans-serif;
 }
 
 :root {
@@ -24,6 +24,8 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; width: 100%; font-family: var(--font-body); }
+button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid #c7a86d; outline-offset: 3px; }
 
 /* Keep the assistant response visually separate from the composer. */
 section.mt-5.rounded-2xl {
@@ -66,6 +68,11 @@ button { font-family: var(--font-body); font-weight: 500; }
 .night-garden .border-forest\/10, .night-garden .border-forest\/15, .night-garden .border-forest\/20 { border-color: rgb(248 246 238 / 0.16) !important; }
 .night-garden header { background-color: rgb(19 43 32 / 0.88) !important; box-shadow: 0 1px 0 rgb(248 246 238 / 0.12); }
 .night-garden a.text-fern, .night-garden button.text-fern { color: #a9c995 !important; }
+.night-garden .bg-white, .night-garden .bg-ivory { background-color: #132b20 !important; }
+.night-garden .bg-sage { background-color: #244836 !important; }
+.night-garden .text-forest\/70, .night-garden .text-forest\/65, .night-garden .text-forest\/60, .night-garden .text-forest\/55, .night-garden .text-forest\/50, .night-garden .text-forest\/45 { color: rgb(248 246 238 / 0.72) !important; }
+.night-garden .border-forest\/10, .night-garden .border-forest\/15, .night-garden .border-forest\/20, .night-garden .border-forest\/25 { border-color: rgb(248 246 238 / 0.22) !important; }
+.night-garden .hover\:bg-sage:hover { background-color: #244836 !important; }
 
 @media (pointer: fine) {
   body { cursor: none; }
@@ -89,10 +96,29 @@ button { font-family: var(--font-body); font-weight: 500; }
 .stem-loader { stroke-dasharray: 92; animation: stem-grow 1.8s ease-in-out infinite alternate; }
 
 .font-display {
-  font-family: 'Bodoni Moda', Georgia, serif;
+  font-family: 'Cormorant Garamond', Georgia, serif;
   font-kerning: normal;
   font-synthesis: none;
 }
+
+/* The archive pages use their own editorial palette; keep their controls readable in night mode. */
+.night-garden .vault-page, .night-garden .passport-page { background: #10251b; color: #f8f6ee; }
+.night-garden .vault-hero { background: #183526; }
+.night-garden .vault-hero h1, .night-garden .vault-intro h2, .night-garden .vault-section-heading h2, .night-garden .vault-pledge h2, .night-garden .passport-body h2 { color: #f8f6ee; }
+.night-garden .vault-hero h1 em, .night-garden .vault-intro h2 i, .night-garden .vault-section-heading h2 i, .night-garden .vault-pledge h2 i, .night-garden .passport-body h2 i { color: #a9c995; }
+.night-garden .vault-hero__copy, .night-garden .vault-lede, .night-garden .passport-body p, .night-garden .vault-card__story { color: #c4d7c8; }
+.night-garden .vault-map { border-color: #f8f6ee24; background: #1e4030; }
+.night-garden .vault-controls, .night-garden .vault-stats, .night-garden .passport-facts, .night-garden .timeline-line { border-color: #f8f6ee24; }
+.night-garden .vault-stats { background: #f8f6ee24; }
+.night-garden .vault-stats div, .night-garden .vault-card__face, .night-garden .passport-sheet, .night-garden .map-pin__popup, .night-garden .passport-preview { background: #193a2a; }
+.night-garden .vault-card__back, .night-garden .curator-panel { background: #214633; }
+.night-garden .vault-card__body h3, .night-garden .vault-card__back h3, .night-garden .passport-sheet__hero h1, .night-garden .passport-preview__content h2 { color: #f8f6ee; }
+.night-garden .vault-search input, .night-garden .vault-filters select, .night-garden .curator-form input { color: #f8f6ee; }
+.night-garden .vault-search input::placeholder, .night-garden .curator-form input::placeholder { color: #9fbaa5; }
+.night-garden .vault-text-button, .night-garden .vault-discover, .night-garden .passport-back, .night-garden .curator-form button { color: #b8d59f; }
+.night-garden .vault-discover:hover { color: #132b20; background: #b8d59f; }
+.night-garden .passport-sheet__top, .night-garden .passport-facts div, .night-garden .passport-preview__facts span { color: #9fbaa5; }
+.night-garden .passport-sheet__top strong, .night-garden .passport-facts strong, .night-garden .passport-preview__facts strong { color: #d2b47c; }
 
 .tracking-label {
   font-family: 'Inter', Arial, sans-serif;

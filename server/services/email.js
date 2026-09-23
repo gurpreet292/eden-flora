@@ -51,3 +51,25 @@ export const sendPasswordResetEmail = async ({ email, token }) => {
     `,
   })
 }
+
+export const sendContactEmail = async ({ name, email, topic, message }) => {
+  const { from, user } = getEmailConfig()
+  const transporter = createTransporter()
+
+  await transporter.sendMail({
+    from,
+    to: user,
+    replyTo: email,
+    subject: `Eden Flora contact: ${topic}`,
+    text: `Name: ${name}\nEmail: ${email}\nTopic: ${topic}\n\n${message}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; color: #1d3c2b; line-height: 1.6;">
+        <h2>New Eden Flora contact message</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Topic:</strong> ${topic}</p>
+        <p style="white-space: pre-line;">${message}</p>
+      </div>
+    `,
+  })
+}

@@ -16,6 +16,7 @@ import attachmentsRouter from './routes/attachments.js'
 import vaultRouter from './routes/vault.js'
 import dashboardRouter from './routes/dashboard.js'
 import aiRouter from './routes/ai.js'
+import contactRouter from './routes/contact.js'
 
 const app = express()
 const port = Number(process.env.PORT || 5000)
@@ -97,6 +98,7 @@ app.use('/api', attachmentsRouter)
 app.use('/api/vault', vaultRouter)
 app.use('/api/dashboard', dashboardRouter)
 app.use('/api/ai', aiRouter)
+app.use('/api', contactRouter)
 
 app.use((error, request, response, _next) => {
   console.error(error)

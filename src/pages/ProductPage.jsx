@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ArrowLeft, Check, ChevronLeft, ChevronRight, Heart, Minus, Plus, ShieldCheck, Star, Truck } from 'lucide-react'
+import { ArrowLeft, Check, Heart, Minus, Plus, ShieldCheck, Star, Truck } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
 import { getPlantPersonality, getProduct, getProductImage, products } from '../data/products'
 import { useStore } from '../hooks/useStore'
@@ -11,15 +11,14 @@ const ProductPage = () => {
   const { addToCart } = useStore()
   const [quantity, setQuantity] = useState(1)
   const [added, setAdded] = useState(false)
-  const [activeImage, setActiveImage] = useState(0)
   const [isSaved, setIsSaved] = useState(false)
+  const [activeTab, setActiveTab] = useState('description')
 
   if (!product) return <Container className="min-h-screen pt-40"><h1 className="font-display text-5xl text-forest">Plant not found.</h1><Link to="/shop" className="mt-8 inline-block text-sm text-fern">Return to shop</Link></Container>
 
   const relatedProducts = products.filter((item) => item.id !== product.id).slice(0, 4)
   const profile = getPlantPersonality(product)
-  const galleryImages = [product, ...relatedProducts.slice(0, 3)]
-  const currentImage = galleryImages[activeImage]
+  const productImage = getProductImage(product, 1400)
   const handleAdd = () => { addToCart(product, quantity); setAdded(true) }
 
   return <main className="bg-ivory pb-28 pt-28 text-forest sm:pt-36">
@@ -30,14 +29,10 @@ const ProductPage = () => {
       </div>
 
       <div className="grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.95fr)] lg:gap-20">
-        <section className="grid gap-4 sm:grid-cols-[88px_minmax(0,1fr)]">
-          <div className="order-2 flex gap-3 overflow-x-auto sm:order-1 sm:flex-col">
-            {galleryImages.map((galleryProduct, index) => <button key={`${galleryProduct.id}-${index}`} type="button" onClick={() => setActiveImage(index)} aria-label={`View product image ${index + 1}`} className={`aspect-square w-20 shrink-0 overflow-hidden rounded-xl border-2 bg-sage/45 p-1 transition ${activeImage === index ? 'border-fern' : 'border-transparent hover:border-gold/50'}`}><img src={getProductImage(galleryProduct, 240)} alt="" className="h-full w-full rounded-lg object-cover" /></button>)}
-          </div>
-          <div className="relative order-1 overflow-hidden rounded-[1.25rem_5rem_1.25rem_5rem] bg-[#eee8d9] p-4 shadow-[0_24px_55px_rgba(27,58,42,0.1)] sm:order-2">
-            <div className="aspect-square overflow-hidden rounded-[0.9rem_4.2rem_0.9rem_4.2rem] bg-[#f4eee2]"><img src={getProductImage(currentImage, 1400)} alt={activeImage === 0 ? product.name : `${product.name} detail`} className="h-full w-full object-cover transition duration-500" /></div>
+        <section>
+          <div className="relative overflow-hidden rounded-[1.25rem_5rem_1.25rem_5rem] bg-[#eee8d9] p-4 shadow-[0_24px_55px_rgba(27,58,42,0.1)]">
+            <div className="aspect-square overflow-hidden rounded-[0.9rem_4.2rem_0.9rem_4.2rem] bg-[#f4eee2]"><img src={productImage} alt={product.name} className="h-full w-full object-cover transition duration-500" /></div>
             <span className="absolute left-8 top-8 rounded-full bg-forest px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.16em] text-ivory">Best seller</span>
-            <div className="absolute bottom-8 right-8 flex gap-2"><button type="button" onClick={() => setActiveImage((activeImage - 1 + galleryImages.length) % galleryImages.length)} aria-label="Previous product image" className="grid size-9 place-items-center rounded-full bg-ivory/90 text-forest shadow-sm backdrop-blur transition hover:bg-gold"><ChevronLeft size={16} /></button><button type="button" onClick={() => setActiveImage((activeImage + 1) % galleryImages.length)} aria-label="Next product image" className="grid size-9 place-items-center rounded-full bg-ivory/90 text-forest shadow-sm backdrop-blur transition hover:bg-gold"><ChevronRight size={16} /></button></div>
           </div>
         </section>
 
@@ -54,7 +49,7 @@ const ProductPage = () => {
         </section>
       </div>
 
-      <section className="mt-24 border-t border-forest/10 pt-10"><div className="flex flex-wrap gap-8 border-b border-forest/10"><button type="button" className="border-b-2 border-fern pb-4 text-xs font-bold uppercase tracking-[0.16em] text-fern">Description</button><button type="button" className="pb-4 text-xs font-bold uppercase tracking-[0.16em] text-forest/40">Care guide</button><button type="button" className="pb-4 text-xs font-bold uppercase tracking-[0.16em] text-forest/40">Reviews</button></div><div className="grid gap-8 py-9 md:grid-cols-[1.2fr_0.8fr]"><p className="max-w-2xl text-sm leading-8 text-forest/65">{product.description} Designed for thoughtful spaces, this plant arrives ready to settle into your home. Give it the light it asks for, keep to its watering rhythm, and let it grow into its place.</p><div className="grid grid-cols-2 gap-3 text-xs"><div className="rounded-xl bg-sage/45 p-4"><p className="text-forest/45">Light</p><p className="mt-2 font-semibold">{product.light}</p></div><div className="rounded-xl bg-sage/45 p-4"><p className="text-forest/45">Watering</p><p className="mt-2 font-semibold">{product.water}</p></div></div></div></section>
+      <section className="mt-24 border-t border-forest/10 pt-10"><div className="flex flex-wrap gap-8 border-b border-forest/10" role="tablist" aria-label="Product information"><button type="button" role="tab" aria-selected={activeTab === 'description'} onClick={() => setActiveTab('description')} className={`${activeTab === 'description' ? 'border-fern text-fern' : 'border-transparent text-forest/40'} border-b-2 pb-4 text-xs font-bold uppercase tracking-[0.16em]`}>Description</button><button type="button" role="tab" aria-selected={activeTab === 'care'} onClick={() => setActiveTab('care')} className={`${activeTab === 'care' ? 'border-fern text-fern' : 'border-transparent text-forest/40'} border-b-2 pb-4 text-xs font-bold uppercase tracking-[0.16em]`}>Care guide</button><button type="button" role="tab" aria-selected={activeTab === 'reviews'} onClick={() => setActiveTab('reviews')} className={`${activeTab === 'reviews' ? 'border-fern text-fern' : 'border-transparent text-forest/40'} border-b-2 pb-4 text-xs font-bold uppercase tracking-[0.16em]`}>Reviews</button></div>{activeTab === 'description' && <div className="grid gap-8 py-9 md:grid-cols-[1.2fr_0.8fr]"><p className="max-w-2xl text-sm leading-8 text-forest/65">{product.description} Designed for thoughtful spaces, this plant arrives ready to settle into your home. Give it the light it asks for, keep to its watering rhythm, and let it grow into its place.</p><div className="grid grid-cols-2 gap-3 text-xs"><div className="rounded-xl bg-sage/45 p-4"><p className="text-forest/45">Light</p><p className="mt-2 font-semibold">{product.light}</p></div><div className="rounded-xl bg-sage/45 p-4"><p className="text-forest/45">Watering</p><p className="mt-2 font-semibold">{product.water}</p></div></div></div>}{activeTab === 'care' && <div className="grid gap-4 py-9 sm:grid-cols-3"><div className="rounded-xl bg-sage/45 p-5"><p className="text-forest/45">Light</p><p className="mt-2 text-sm font-semibold">{product.light}</p></div><div className="rounded-xl bg-sage/45 p-5"><p className="text-forest/45">Watering</p><p className="mt-2 text-sm font-semibold">{product.water}</p></div><div className="rounded-xl bg-sage/45 p-5"><p className="text-forest/45">Care level</p><p className="mt-2 text-sm font-semibold">{profile.difficulty}</p></div></div>}{activeTab === 'reviews' && <div className="grid gap-8 py-9 md:grid-cols-[0.7fr_1.3fr]"><div><p className="font-display text-5xl text-fern">4.9</p><div className="mt-3 flex gap-1 text-gold" aria-label="4.9 out of 5 stars"><Star size={14} fill="currentColor" /><Star size={14} fill="currentColor" /><Star size={14} fill="currentColor" /><Star size={14} fill="currentColor" /><Star size={14} fill="currentColor" /></div><p className="mt-3 text-xs text-forest/55">Based on 38 reviews</p></div><div className="border-l border-forest/10 pl-6"><p className="text-sm leading-7 text-forest/65">“Beautifully packed and already thriving. The care notes made settling it into my home wonderfully simple.”</p><p className="mt-4 text-[10px] font-bold uppercase tracking-[0.16em] text-gold">Verified customer</p></div></div>}</section>
 
       <section className="mt-14 border-t border-forest/10 pt-16"><div className="flex flex-wrap items-end justify-between gap-5"><div><p className="text-[10px] font-bold uppercase tracking-[0.25em] text-gold">Made for your collection</p><h2 className="mt-3 font-display text-4xl text-forest sm:text-5xl">Explore related plants</h2></div><Link to="/shop" className="text-xs font-bold uppercase tracking-[0.16em] text-fern">View all plants</Link></div><div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">{relatedProducts.map((relatedProduct) => <Link key={relatedProduct.id} to={`/product/${relatedProduct.id}`} className="group"><div className="aspect-square overflow-hidden rounded-[1rem_2.5rem_1rem_2.5rem] bg-sage/45 p-3"><img src={getProductImage(relatedProduct, 500)} alt={relatedProduct.name} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" /></div><p className="mt-4 text-[9px] font-bold uppercase tracking-[0.16em] text-gold">{relatedProduct.category}</p><h3 className="mt-2 font-display text-xl leading-none text-forest group-hover:text-fern">{relatedProduct.name}</h3><p className="mt-3 text-sm font-semibold text-fern">${relatedProduct.price}</p></Link>)}</div></section>
     </Container>

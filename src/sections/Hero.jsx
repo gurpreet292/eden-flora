@@ -5,6 +5,7 @@ import Container from '../components/Container'
 import MagneticButton from '../components/MagneticButton'
 import BackgroundDecor from './BackgroundDecor'
 import FloatingLeaves from './FloatingLeaves'
+import { getProduct, getProductImage } from '../data/products'
 
 const ease = [0.22, 1, 0.36, 1]
 const revealLine = { hidden: { opacity: 0, y: 28 }, visible: { opacity: 1, y: 0, transition: { duration: 1, ease } } }
@@ -17,6 +18,7 @@ const LeafFrame = () => <div className="pointer-events-none absolute inset-0 z-1
 </div>
 
 const Hero = () => {
+  const heroPlant = getProduct('monstera-deliciosa')
   const sectionRef = useRef(null)
   const pointerX = useMotionValue(0)
   const pointerY = useMotionValue(0)
@@ -66,7 +68,7 @@ const Hero = () => {
           <LeafFrame />
           <motion.div animate={{ rotate: [0, 1.2, 0], scale: [1, 1.012, 1] }} transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }} className="absolute -right-4 top-1/4 size-24 rounded-full border border-gold/40 sm:-right-10 sm:size-36" />
           <div className="relative aspect-[0.92] overflow-hidden rounded-[10rem_10rem_1rem_1rem] bg-[#d7e2d0] shadow-[20px_30px_60px_rgba(27,58,42,0.14)] transition-transform duration-700 hover:scale-[1.012]">
-            <img className="h-full w-full object-cover transition-transform duration-1400 ease-out hover:scale-[1.04]" src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=1200&q=85" alt="Lush green houseplant in a sunlit interior" />
+            <img className="h-full w-full object-cover transition-transform duration-1400 ease-out hover:scale-[1.04]" src={getProductImage(heroPlant, 1200)} alt={`${heroPlant.name} in a sunlit interior`} />
             <div className="absolute inset-0 bg-linear-to-t from-forest/20 via-transparent to-ivory/10" />
           </div>
           <motion.div animate={{ y: [0, -7, 0] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }} className="absolute -bottom-6 -left-5 flex size-24 items-center justify-center rounded-3xl border border-white/50 bg-ivory/60 shadow-[0_16px_35px_rgba(27,58,42,0.14)] backdrop-blur-xl sm:-left-10 sm:size-32"><div className="text-center"><span className="font-display text-3xl text-fern">01</span><span className="mt-1 block text-[8px] font-bold uppercase tracking-[0.2em] text-forest/50">of 04</span></div></motion.div>

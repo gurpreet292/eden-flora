@@ -20,12 +20,13 @@ import contactRouter from './routes/contact.js'
 
 const app = express()
 const port = Number(process.env.PORT || 5000)
+const clientOrigin = process.env.CLIENT_ORIGIN || true
 
 app.use(helmet())
 
 app.use(
   cors({
-    origin: process.env.CLIENT_ORIGIN || 'http://localhost:5173',
+    origin: clientOrigin,
     credentials: true,
   })
 )
@@ -108,10 +109,14 @@ app.use((error, request, response, _next) => {
   })
 })
 
-app.listen(port, () => {
-  console.log(`Eden Flora API listening on http://localhost:${port}`)
+if (!process.env.VERCEL) {
+  app.listen(port, () => {
+    console.log(`Eden Flora API listening on http://localhost:${port}`)
 
-  ensureDatabaseIndexes().catch((error) => {
-    console.error(`Database indexes unavailable: ${error.message}`)
+    ensureDatabaseIndexes().catch((error) => {
+      console.error(`Database indexes unavailable: ${error.message}`)
+    })
   })
-})
+}
+
+export default app

@@ -11,14 +11,26 @@ The project now includes an Express API backed by MongoDB.
 
 The API runs on `http://localhost:5000` and exposes:
 
-- `GET /api/health` - MongoDB connection check
-- `GET /api/products` - product catalog, seeded on first request
-- `GET /api/products/:id` - one product
-- `POST /api/orders` - create an order with `customer` and `items`
 
 The Vite development server proxies `/api` requests to the backend. The MongoDB password must only exist in `.env`; never commit it or place it in React code.
-
+The MongoDB password must only exist in `.env`; never commit it or place it in React code.
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+## Deploying to Vercel
+
+This repository is configured as a single Vercel project. Vercel builds the Vite
+frontend and exposes the Express API through `api/index.js`, so frontend requests
+can continue using relative `/api` URLs.
+
+1. Import the GitHub repository into Vercel.
+2. Keep the framework preset as Vite, with the default build command `npm run build`
+	and output directory `dist`.
+3. Add these production environment variables in Vercel: `MONGODB_URI`,
+	`MONGODB_DB`, `JWT_SECRET`, `CLIENT_ORIGIN`, and `APP_URL`.
+4. Add `GEMINI_API_KEY`, `CLOUDINARY_CLOUD_NAME`, and
+	`CLOUDINARY_UPLOAD_PRESET` if those features are needed.
+
+Set `CLIENT_ORIGIN` and `APP_URL` to the final Vercel domain. Do not upload `.env`
+to GitHub; use Vercel's Environment Variables settings instead.
 
 Currently, two official plugins are available:
 

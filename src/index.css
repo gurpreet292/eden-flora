@@ -73,6 +73,22 @@ button { font-family: var(--font-body); font-weight: 500; }
 .night-garden .text-forest\/70, .night-garden .text-forest\/65, .night-garden .text-forest\/60, .night-garden .text-forest\/55, .night-garden .text-forest\/50, .night-garden .text-forest\/45 { color: rgb(248 246 238 / 0.72) !important; }
 .night-garden .border-forest\/10, .night-garden .border-forest\/15, .night-garden .border-forest\/20, .night-garden .border-forest\/25 { border-color: rgb(248 246 238 / 0.22) !important; }
 .night-garden .hover\:bg-sage:hover { background-color: #244836 !important; }
+.night-garden .bg-forest,
+.night-garden .bg-forest\:hover,
+.night-garden a.bg-forest,
+.night-garden button.bg-forest,
+.night-garden .rounded-full.bg-forest {
+  background-color: #dfeec9 !important;
+}
+.night-garden .text-ivory,
+.night-garden a.text-ivory,
+.night-garden button.text-ivory {
+  color: #132b20 !important;
+}
+.night-garden .hover\:bg-fern:hover,
+.night-garden .hover\:bg-forest:hover {
+  filter: brightness(0.96);
+}
 
 @media (pointer: fine) {
   body { cursor: none; }

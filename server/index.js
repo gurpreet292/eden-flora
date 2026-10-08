@@ -25,13 +25,17 @@ const configuredOrigins = (process.env.CLIENT_ORIGIN || '')
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean)
+const vercelOrigins = [process.env.VERCEL_URL, process.env.VERCEL_PROJECT_PRODUCTION_URL]
+  .filter(Boolean)
+  .flatMap((origin) => [origin, `https://${origin}`])
+const allowedOrigins = new Set([...configuredOrigins, ...vercelOrigins])
 const localOriginPattern = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/
 
 if (isProduction && (!process.env.JWT_SECRET || process.env.JWT_SECRET.length < 32)) {
   throw new Error('JWT_SECRET must be configured with at least 32 characters in production.')
 }
 
-if (isProduction && configuredOrigins.length === 0) {
+if (isProduction && allowedOrigins.size === 0) {
   throw new Error('CLIENT_ORIGIN must be configured in production.')
 }
 
@@ -41,7 +45,7 @@ app.use(
   cors({
     origin: (origin, callback) => {
       if (!origin && !isProduction) return callback(null, true)
-      if (configuredOrigins.includes(origin)) return callback(null, true)
+      if (allowedOrigins.has(origin)) return callback(null, true)
       if (!isProduction && localOriginPattern.test(origin || '')) return callback(null, true)
       return callback(new Error('Origin is not allowed by CORS.'))
     },

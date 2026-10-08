@@ -2,27 +2,22 @@ import { useEffect, useState } from 'react'
 import { ArrowRight, Leaf, LockKeyhole, Mail, Sparkles } from 'lucide-react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import api from '../utils/api'
+import { useAuth } from '../context/auth'
 
 const initialForm = { name: '', email: '', password: '', confirmPassword: '' }
 
 const AuthPage = ({ mode = 'login' }) => {
   const navigate = useNavigate()
   const location = useLocation()
+  const { user, isLoading: isSessionLoading, refreshSession } = useAuth()
   const [form, setForm] = useState(initialForm)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const isRegister = mode === 'register'
 
   useEffect(() => {
-    try {
-      const savedUser = localStorage.getItem('eden-flora-user')
-      if (savedUser) {
-        navigate('/')
-      }
-    } catch {
-      // ignore
-    }
-  }, [navigate])
+    if (!isSessionLoading && user) navigate('/')
+  }, [isSessionLoading, navigate, user])
 
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -51,7 +46,7 @@ const AuthPage = ({ mode = 'login' }) => {
       const response = await api.post(endpoint, payload)
 
       localStorage.setItem('eden-flora-user', JSON.stringify(response.data.user))
-      window.dispatchEvent(new Event('auth:updated'))
+      await refreshSession()
 
       const redirectTarget = location.state?.from || '/'
       navigate(redirectTarget)

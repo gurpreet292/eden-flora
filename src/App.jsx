@@ -9,7 +9,6 @@ import BotanicalVideo from './sections/BotanicalVideo'
 import GardenJournal from './sections/GardenJournal'
 import BloomGallery from './sections/BloomGallery'
 import TestimonialsSocial from './sections/TestimonialsSocial'
-import CustomCursor from './components/CustomCursor'
 import ScrollToTop from './components/ScrollToTop'
 import ProtectedRoute from './components/ProtectedRoute'
 import { ThemeProvider } from './context/ThemeContext'
@@ -32,7 +31,7 @@ const Foundation = () => <div className="min-h-screen overflow-hidden bg-ivory t
 const RouteFallback = () => <div className="grid min-h-screen place-items-center bg-ivory text-sm text-forest/60">Loading your garden...</div>
 
 function App() {
-	return <ThemeProvider><AuthProvider><StoreProvider><BrowserRouter><ScrollToTop /><CustomCursor /><Suspense fallback={<RouteFallback />}><Routes>
+	return <ThemeProvider><AuthProvider><StoreProvider><BrowserRouter><ScrollToTop /><Suspense fallback={<RouteFallback />}><Routes>
 		<Route path="/" element={<Foundation />} />
 		<Route path="/shop" element={<><Navbar /><SitePage type="shop" /></>} />
 		<Route path="/collections" element={<><Navbar /><SitePage type="collections" /></>} />

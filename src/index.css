@@ -127,11 +127,6 @@ button { font-family: var(--font-body); font-weight: 500; }
 .night-garden .hover\:bg-fern:hover,
 .night-garden .hover\:bg-forest:hover { filter: brightness(0.96); }
 
-@media (pointer: fine) {
-  body { cursor: none; }
-  a, button, input { cursor: none; }
-}
-
 .custom-cursor-active {
   width: 5rem;
   height: 5rem;

@@ -18,7 +18,7 @@ const rarePlants = [
     passportId: 'EF-RP-0001',
     birthday: '14 April 1804',
     discoveryYear: 1804,
-    image: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=85',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Camellia%20japonica%20NBG.jpg?width=1200',
     accent: '#b86b68',
   },
   {
@@ -40,7 +40,7 @@ const rarePlants = [
     passportId: 'EF-RP-0002',
     birthday: '07 June 1844',
     discoveryYear: 1844,
-    image: 'https://images.unsplash.com/photo-1562690868-60bbe7293e94?auto=format&fit=crop&w=1200&q=85',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Dendrophylax%20lindenii%20cultivated%20by%20Jeff%20Hale.JPG?width=1200',
     accent: '#d7e8dc',
   },
   {
@@ -62,7 +62,7 @@ const rarePlants = [
     passportId: 'EF-RP-0003',
     birthday: '22 September 1849',
     discoveryYear: 1849,
-    image: 'https://images.unsplash.com/photo-1614594575929-bd2a8d6f4b79?auto=format&fit=crop&w=1200&q=85',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Monstera%20obliqua.jpg?width=1200',
     accent: '#a8c59d',
   },
   {
@@ -84,7 +84,7 @@ const rarePlants = [
     passportId: 'EF-RP-0004',
     birthday: '03 March 1970',
     discoveryYear: 1970,
-    image: 'https://images.unsplash.com/photo-1614594575929-bd2a8d6f4b79?auto=format&fit=crop&w=1200&q=85',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Philodendron%20spiritus-sancti.jpg?width=1200',
     accent: '#97b990',
   },
   {
@@ -106,7 +106,7 @@ const rarePlants = [
     passportId: 'EF-RP-0005',
     birthday: '16 September 1860',
     discoveryYear: 1860,
-    image: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=85',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Welwitschia%20mirabilis.jpg?width=1200',
     accent: '#c7a86d',
   },
   {
@@ -128,7 +128,7 @@ const rarePlants = [
     passportId: 'EF-RP-0006',
     birthday: '01 July 2006',
     discoveryYear: 2006,
-    image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=85',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Rosa%20Juliet.jpg?width=1200',
     accent: '#dfb48c',
   },
   {
@@ -150,7 +150,7 @@ const rarePlants = [
     passportId: 'EF-RP-0007',
     birthday: '12 November 1998',
     discoveryYear: 1998,
-    image: 'https://images.unsplash.com/photo-1614594575929-bd2a8d6f4b79?auto=format&fit=crop&w=1200&q=85',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Fruit%20Salad%20Plant%20%28Monstera%20deliciosa%20%27Albo-Variegata%27%29.jpg?width=1200',
     accent: '#e8eee1',
   },
   {
@@ -172,7 +172,7 @@ const rarePlants = [
     passportId: 'EF-RP-0008',
     birthday: '30 October 1887',
     discoveryYear: 1887,
-    image: 'https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=1200&q=85',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Tacca%20chantrieri.jpg?width=1200',
     accent: '#6e5269',
   },
 ]

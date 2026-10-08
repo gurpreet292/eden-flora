@@ -60,7 +60,6 @@ const Hero = () => {
           <motion.div variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease } } }} className="mt-9 flex flex-wrap items-center gap-4">
             <MagneticButton href="#shop">Explore the collection</MagneticButton>
             <a href="#story" className="group inline-flex items-center gap-3 rounded-full border border-forest/25 px-5 py-3.5 text-sm font-medium text-forest transition-all duration-300 hover:-translate-y-1 hover:border-fern hover:bg-ivory/50"><span>Our philosophy</span><span className="text-fern transition-transform duration-300 group-hover:translate-x-1">→</span></a>
-            <a href="#test-drive" className="text-xs font-bold uppercase tracking-[0.16em] text-fern underline-offset-4 hover:underline">Test every feature</a>
           </motion.div>
         </motion.div>
 

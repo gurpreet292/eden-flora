@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { BadgeCheck, CalendarRange, Leaf, ShieldCheck, ShoppingBag } from 'lucide-react'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../context/auth'
 import api from '../utils/api'
 
 const DashboardPage = () => {

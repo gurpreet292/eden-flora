@@ -20,13 +20,29 @@ import contactRouter from './routes/contact.js'
 
 const app = express()
 const port = Number(process.env.PORT || 5000)
-const clientOrigin = process.env.CLIENT_ORIGIN || true
+const isProduction = process.env.NODE_ENV === 'production' || Boolean(process.env.VERCEL)
+const configuredOrigins = (process.env.CLIENT_ORIGIN || '')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean)
+
+if (isProduction && (!process.env.JWT_SECRET || process.env.JWT_SECRET.length < 32)) {
+  throw new Error('JWT_SECRET must be configured with at least 32 characters in production.')
+}
+
+if (isProduction && configuredOrigins.length === 0) {
+  throw new Error('CLIENT_ORIGIN must be configured in production.')
+}
 
 app.use(helmet())
 
 app.use(
   cors({
-    origin: clientOrigin,
+    origin: (origin, callback) => {
+      if (!origin && !isProduction) return callback(null, true)
+      if (configuredOrigins.includes(origin)) return callback(null, true)
+      return callback(new Error('Origin is not allowed by CORS.'))
+    },
     credentials: true,
   })
 )
@@ -54,6 +70,22 @@ const resetLimiter = rateLimit({
   },
 })
 
+const publicApiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 60,
+  standardHeaders: 'draft-8',
+  legacyHeaders: false,
+  message: { message: 'Too many requests. Please try again later.' },
+})
+
+const aiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 30,
+  standardHeaders: 'draft-8',
+  legacyHeaders: false,
+  message: { message: 'Too many AI requests. Please try again later.' },
+})
+
 app.get('/', (request, response) => {
   response.json({
     name: 'Eden Flora API',
@@ -76,11 +108,11 @@ app.get('/api/health', async (request, response) => {
       status: 'ok',
       database: 'connected',
     })
-  } catch (error) {
+  } catch {
     return response.status(503).json({
       status: 'error',
       database: 'disconnected',
-      message: error.message,
+      message: 'Database unavailable.',
     })
   }
 })
@@ -98,7 +130,9 @@ app.use('/api', notesRouter)
 app.use('/api', attachmentsRouter)
 app.use('/api/vault', vaultRouter)
 app.use('/api/dashboard', dashboardRouter)
+app.use('/api/ai', aiLimiter)
 app.use('/api/ai', aiRouter)
+app.use('/api/contact', publicApiLimiter)
 app.use('/api', contactRouter)
 
 app.use((error, request, response, _next) => {

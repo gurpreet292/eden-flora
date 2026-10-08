@@ -9,7 +9,7 @@ import { sendPasswordResetEmail } from '../services/email.js'
 
 const router = Router()
 const localUsers = new Map()
-const jwtSecret = process.env.JWT_SECRET || 'eden-flora-dev-secret'
+const jwtSecret = process.env.JWT_SECRET || 'local-development-secret-change-me'
 const minimumPasswordLength = 8
 const authCookieName = 'eden_flora_session'
 

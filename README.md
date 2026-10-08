@@ -2,7 +2,103 @@
 
 ## Backend
 
-The project now includes an Express API backed by MongoDB.
+Eden Flora
+
+Eden Flora is a full-stack botanical commerce experience for discovering, caring for, and collecting plants. It combines an editorial React storefront with an Express API, MongoDB-backed accounts and orders, a botanical archive, plant passports, shared collections, and AI-assisted plant care tools.
+
+## Highlights
+
+- Responsive storefront with product discovery, filtering, sorting, quick view, cart, and checkout flow
+- Greenhouse and Night Garden visual themes with responsive layouts and animated editorial sections
+- Authentication with protected dashboards, password reset flow, and order history
+- Botanical Vault with rare plant records, interactive regions, conservation details, and plant passports
+- Shared plant collections with notes, members, attachments, and public project links
+- AI features for plant questions, image health scans, note explanations, and README generation
+- Express API with MongoDB, secure cookies, Helmet, CORS, rate limiting, and Vercel deployment support
+
+## Tech Stack
+
+**Frontend:** React, React Router, Vite, Tailwind CSS, Framer Motion, Lucide React
+
+**Backend:** Node.js, Express, MongoDB, JWT, bcrypt, Nodemailer, Cloudinary, Gemini API
+
+## Project Structure
+
+```text
+src/             React application, pages, components, contexts, and theme styles
+server/          Express server, routes, controllers, models, and services
+api/             Vercel serverless API entry point
+public/          Static assets
+vercel.json      Vercel routing and deployment configuration
+```
+
+## Local Development
+
+### Prerequisites
+
+- Node.js 20 or newer
+- MongoDB Atlas or a local MongoDB instance
+
+### Setup
+
+```bash
+git clone <repository-url>
+cd Plant_website
+npm install
+cp .env.example .env
+```
+
+Add the required values to `.env`. Keep this file private and never commit credentials.
+
+```env
+MONGODB_URI=your-mongodb-connection-string
+MONGODB_DB=eden_flora
+JWT_SECRET=replace-with-a-long-random-secret
+CLIENT_ORIGIN=http://localhost:5173
+APP_URL=http://localhost:5173
+GEMINI_API_KEY=optional
+CLOUDINARY_CLOUD_NAME=optional
+CLOUDINARY_UPLOAD_PRESET=optional
+```
+
+Run the frontend and API in separate terminals:
+
+```bash
+npm run dev
+npm run server
+```
+
+The frontend runs at `http://localhost:5173` and the API runs at `http://localhost:5000`.
+
+## Available Scripts
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the Vite development server |
+| `npm run server` | Start the Express API with file watching |
+| `npm run build` | Create a production frontend build |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | Run Oxlint across the project |
+
+## API Health Check
+
+Once the server is running, open `http://localhost:5000/api/health` to verify the API and database connection.
+
+## Deployment
+
+The project is configured as a single Vercel deployment. Vercel builds the Vite frontend and serves the Express API through `api/index.js`.
+
+Configure these variables in the Vercel project settings:
+
+`MONGODB_URI`, `MONGODB_DB`, `JWT_SECRET`, `CLIENT_ORIGIN`, and `APP_URL`.
+
+Add `GEMINI_API_KEY`, `CLOUDINARY_CLOUD_NAME`, and `CLOUDINARY_UPLOAD_PRESET` when enabling the optional AI and attachment features.
+
+## Security Notes
+
+- Credentials belong in environment variables, never in React code or committed files.
+- Production authentication and CORS origins should use the deployed domain.
+- API health, authentication, and upload endpoints should be monitored after deployment.
 
 1. Copy `.env.example` to `.env`.
 2. Set `MONGODB_URI` to your MongoDB Atlas connection string and keep the file private.

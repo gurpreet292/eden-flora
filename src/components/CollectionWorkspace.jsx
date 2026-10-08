@@ -1,24 +1,13 @@
 import { Bot, Check, Copy, FileText, Plus, Share2, Upload, UserPlus, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../context/auth'
 import api from '../utils/api'
+import { isImageFile } from '../utils/collection'
 import { AiStatus, NoteAI, PlantHealthScan, ReadmeAction } from './CollectionAI'
+import CollectionMarkdownPreview from './CollectionMarkdownPreview'
 
-const MarkdownPreview = ({ content }) => (
-  <div className="mt-2 space-y-1 text-[11px] leading-5 text-forest/65">
-    {content.split('\n').map((line, index) => {
-      const trimmed = line.trim()
-      if (trimmed.startsWith('## ')) return <h5 key={index} className="font-semibold text-forest">{trimmed.slice(3)}</h5>
-      if (trimmed.startsWith('# ')) return <h4 key={index} className="font-display text-lg text-forest">{trimmed.slice(2)}</h4>
-      if (trimmed.startsWith('- ')) return <p key={index}>• {trimmed.slice(2)}</p>
-      return <p key={index}>{trimmed || '\u00a0'}</p>
-    })}
-  </div>
-)
-
-const imageTypes = new Set(['image/jpeg', 'image/png', 'image/webp'])
-const isImageFile = (file) => imageTypes.has(file.type)
+const MarkdownPreview = CollectionMarkdownPreview
 
 const CollectionWorkspace = () => {
   const { user } = useAuth()
@@ -196,7 +185,7 @@ const CollectionWorkspace = () => {
     try { const response = await api.post('/api/ai/ask', { question: submittedQuestion }); setAnswer(`You: ${submittedQuestion}\n\nAssistant: ${response.data.answer}`) } catch (error) { setAnswer(`You: ${submittedQuestion}\n\nAssistant: ${error.response?.data?.message || 'The care assistant is unavailable right now.'}`) }
   }
 
-  if (!user) return <section className="mt-20 rounded-4xl border border-forest/10 bg-sage/45 p-8 text-center"><h2 className="font-display text-4xl text-forest">Make collections together.</h2><p className="mt-3 text-sm text-forest/60">Sign in to create a collection and share plant care with everyone at home.</p><Link to="/login" className="mt-6 inline-flex rounded-full bg-forest px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-ivory">Sign in</Link></section>
+  if (!user) return <section className="mt-20 rounded-4xl border border-forest/10 bg-sage/45 p-8 text-center"><h2 className="font-display text-4xl text-forest">Make collections together.</h2><p className="mt-3 text-sm text-forest/60">Create an account to build collections and share plant care with everyone at home.</p><Link to="/register" style={{ color: '#f8f6ee' }} className="mt-6 inline-flex rounded-full bg-forest px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-ivory">Create</Link></section>
 
   return <section className="collection-workspace mt-20 rounded-4xl bg-sage px-5 py-10 sm:px-8 sm:py-14">
     <div className="flex flex-wrap items-end justify-between gap-5"><div><p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">Projects, care, and shared access</p><h2 className="mt-3 font-display text-4xl text-forest sm:text-5xl">Your living collections.</h2></div><p className="max-w-sm text-sm leading-6 text-forest/60">Create a shared plant space, keep its journal, upload care files, and invite the people who tend it with you.</p></div>

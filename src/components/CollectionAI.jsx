@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Check, ChevronDown, ChevronUp, Clipboard, Download, FileCode2, FileText, ImagePlus, LoaderCircle, Pencil, Sparkles, Trash2, X } from 'lucide-react'
+import { Check, ChevronDown, ChevronUp, Clipboard, Download, FileCode2, FileText, LoaderCircle, Pencil, Sparkles, Trash2, X } from 'lucide-react'
 import api from '../utils/api'
 
 const ResultCard = ({ title, children, onClose, badge = 'Gemini' }) => <div className="mt-3 animate-[vault-scroll-pulse_0.8s_ease-out] rounded-xl border border-fern/20 bg-[#f7fbf2] p-4 text-forest shadow-sm"><div className="flex items-center gap-2"><p className="mr-auto text-[10px] font-bold uppercase tracking-[0.14em] text-gold">{title}</p><span className="rounded-full bg-forest px-2 py-1 text-[9px] font-bold uppercase tracking-[0.1em] text-ivory">{badge}</span>{onClose ? <button type="button" onClick={onClose} aria-label="Close AI result" className="grid size-6 place-items-center rounded-full border border-forest/10 text-forest/60 hover:text-forest"><X size={13} /></button> : null}</div>{children}</div>
@@ -72,7 +72,7 @@ export const PlantHealthScan = ({ image, onClose }) => {
 }
 
 const codeTypes = ['.js', '.jsx', '.ts', '.html', '.css', '.py']
-export const isCodeFile = (name) => codeTypes.includes(name.slice(name.lastIndexOf('.')).toLowerCase())
+const isCodeFile = (name) => codeTypes.includes(name.slice(name.lastIndexOf('.')).toLowerCase())
 export const CodeAI = ({ file, content }) => {
   const [answer, setAnswer] = useState('')
   const [loading, setLoading] = useState(false)
@@ -127,6 +127,3 @@ export const ReadmeAction = ({ project, notes = [], attachments = [], stats }) =
 }
 
 export const AiStatus = ({ children }) => <span className="inline-flex items-center gap-1 rounded-full bg-sage px-2 py-1 text-[9px] font-bold uppercase tracking-[0.1em] text-fern"><Check size={11} /> {children}</span>
-
-export const ScanIcon = ImagePlus
-export const AiLoader = LoaderCircle

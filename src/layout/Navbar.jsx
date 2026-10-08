@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { useStore } from '../hooks/useStore'
 import CartDrawer from '../components/CartDrawer'
 import { useTheme } from '../hooks/useTheme'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../context/auth'
 
 const links = ['Home', 'Shop', 'Collections', 'Vault', 'About', 'Contact']
 
@@ -39,7 +39,7 @@ const Navbar = () => {
     <>
       <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${scrolled ? 'bg-ivory/90 shadow-[0_1px_0_rgba(27,58,42,0.08)] backdrop-blur-lg' : 'bg-transparent'}`}>
       <Container className="flex h-20 items-center justify-between">
-        <Link to="/" className="font-display text-3xl font-semibold tracking-[-0.04em] text-forest">Eden Flora<span className="text-gold">.</span></Link>
+        <Link to="/" className="mr-5 whitespace-nowrap font-display text-3xl font-semibold tracking-[-0.04em] text-forest">Eden Flora<span className="text-gold">.</span></Link>
         <nav className="hidden items-center gap-8 md:flex">
           {links.map((link) => <Link key={link} to={link === 'Home' ? '/' : `/${link.toLowerCase()}`} className="text-[11px] font-semibold uppercase tracking-[0.18em] text-forest/75 transition-colors hover:text-fern">{link}</Link>)}
         </nav>
@@ -48,7 +48,7 @@ const Navbar = () => {
           {!user ? (
             <>
               <Link to="/login" className="hidden items-center gap-2 rounded-full border border-forest/15 px-3 py-2 text-[9px] font-bold uppercase tracking-[0.14em] text-forest/70 transition hover:border-fern hover:text-forest sm:flex"><LogIn size={14} /> Login</Link>
-              <Link to="/register" className="hidden items-center gap-2 rounded-full bg-forest px-3 py-2 text-[9px] font-bold uppercase tracking-[0.14em] text-ivory transition hover:bg-fern sm:flex"><UserPlus size={14} /> Join</Link>
+              <Link to="/register" style={{ color: '#f8f6ee' }} className="hidden items-center gap-2 rounded-full bg-forest px-3 py-2 text-[9px] font-bold uppercase tracking-[0.14em] text-ivory transition hover:bg-fern sm:flex"><UserPlus size={14} /> Join</Link>
             </>
           ) : (
             <div className="relative hidden sm:block">

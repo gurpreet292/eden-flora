@@ -33,7 +33,7 @@ const generate = async (prompt, fallback) => {
   return { answer: fallback, source: 'Eden Flora local guidance' }
 }
 
-const generateImageAnalysis = async (image, context, fallback) => {
+const generateImageAnalysis = async (image, context) => {
   if (process.env.GEMINI_API_KEY) {
     try {
       const [metadata, data] = String(image).split(',', 2)
@@ -120,7 +120,7 @@ router.post('/image', async (request, response, next) => {
     const image = String(request.body?.image || '')
     const context = String(request.body?.context || '').trim().slice(0, 1000)
     if (!/^data:image\/(jpeg|png|webp);base64,/.test(image) || image.length > 4 * 1024 * 1024) return response.status(400).json({ message: 'Upload a JPEG, PNG, or WebP image smaller than 3 MB.' })
-    response.json(await generateImageAnalysis(image, context, 'The image shows a plant, but a reliable diagnosis is not possible from this view. Check the soil moisture, drainage, light exposure, and undersides of leaves, then compare changes over several days.'))
+    response.json(await generateImageAnalysis(image, context))
   } catch (error) {
     next(error)
   }

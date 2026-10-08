@@ -1,7 +1,6 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import api from '../utils/api'
-
-const AuthContext = createContext(null)
+import { AuthContext } from './auth'
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
@@ -14,20 +13,29 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('eden-flora-user', JSON.stringify(response.data.user))
       return response.data.user
     } catch {
+      // The failed session request must clear stale auth state.
+      // eslint-disable-next-line react/set-state-in-effect
       setUser(null)
       localStorage.removeItem('eden-flora-user')
       return null
     } finally {
+      // The session request has completed, so release the startup loading state.
+      // eslint-disable-next-line react/set-state-in-effect
       setIsLoading(false)
     }
   }
 
   useEffect(() => {
+    // Bootstrap auth from the external session API when the provider mounts.
+    // eslint-disable-next-line react/set-state-in-effect
     refreshSession()
 
     const handleAuthChange = () => refreshSession()
     const handleExpiredSession = () => {
+      // This event synchronizes auth state after the API reports an expired session.
+      // eslint-disable-next-line react/set-state-in-effect
       setUser(null)
+      // eslint-disable-next-line react/set-state-in-effect
       setIsLoading(false)
     }
     window.addEventListener('auth:updated', handleAuthChange)
@@ -50,5 +58,3 @@ export const AuthProvider = ({ children }) => {
 
   return <AuthContext.Provider value={{ user, setUser, isLoading, refreshSession, logout }}>{children}</AuthContext.Provider>
 }
-
-export const useAuth = () => useContext(AuthContext)

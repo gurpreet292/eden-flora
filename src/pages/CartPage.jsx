@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Container from '../components/Container'
 import { getPlantPersonality, getProductImage } from '../data/products'
 import { useStore } from '../hooks/useStore'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../context/auth'
 import api from '../utils/api'
 
 const CareCard = ({ cart }) => (

@@ -15,12 +15,12 @@ export const products = [
 
 export const getProduct = (id) => products.find((product) => product.id === id)
 
-const localPlantImages = import.meta.glob('../assets/plants/*.png', { eager: true, query: '?url', import: 'default' })
+const localPlantImages = import.meta.glob('../assets/plants/*.webp', { eager: true, query: '?url', import: 'default' })
 const localImageNames = { 'snake-plant': 'snake-plant-laurentii', 'zz-plant': 'zz-plant-raven' }
 
 export const getProductImage = (product, width = 800) => {
   const imageName = localImageNames[product.id] || product.id
-  return localPlantImages[`../assets/plants/${imageName}.png`] || `https://images.unsplash.com/${product.image}?auto=format&fit=crop&w=${width}&q=85`
+  return localPlantImages[`../assets/plants/${imageName}.webp`] || `https://images.unsplash.com/${product.image}?auto=format&fit=crop&w=${width}&q=85`
 }
 
 export const getPlantPersonality = (product) => {

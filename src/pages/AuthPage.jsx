@@ -9,7 +9,7 @@ const initialForm = { name: '', email: '', password: '', confirmPassword: '' }
 const AuthPage = ({ mode = 'login' }) => {
   const navigate = useNavigate()
   const location = useLocation()
-  const { user, isLoading: isSessionLoading, refreshSession } = useAuth()
+  const { user, isLoading: isSessionLoading, setUser } = useAuth()
   const [form, setForm] = useState(initialForm)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
@@ -45,8 +45,8 @@ const AuthPage = ({ mode = 'login' }) => {
       const payload = isRegister ? { name: form.name, email: form.email, password: form.password } : { email: form.email, password: form.password }
       const response = await api.post(endpoint, payload)
 
+      setUser(response.data.user)
       localStorage.setItem('eden-flora-user', JSON.stringify(response.data.user))
-      await refreshSession()
 
       const redirectTarget = location.state?.from || '/'
       navigate(redirectTarget)

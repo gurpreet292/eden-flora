@@ -1,18 +1,23 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import api from '../utils/api'
 import { AuthContext } from './auth'
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
+  const sessionRequestRef = useRef(0)
 
   const refreshSession = async () => {
+    const requestId = ++sessionRequestRef.current
+
     try {
       const response = await api.get('/api/auth/me')
+      if (requestId !== sessionRequestRef.current) return response.data.user
       setUser(response.data.user)
       localStorage.setItem('eden-flora-user', JSON.stringify(response.data.user))
       return response.data.user
     } catch {
+      if (requestId !== sessionRequestRef.current) return null
       // The failed session request must clear stale auth state.
       // eslint-disable-next-line react/set-state-in-effect
       setUser(null)

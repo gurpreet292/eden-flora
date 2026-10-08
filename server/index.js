@@ -29,7 +29,7 @@ const vercelOrigins = [process.env.VERCEL_URL, process.env.VERCEL_PROJECT_PRODUC
   .filter(Boolean)
   .flatMap((origin) => [origin, `https://${origin}`])
 const allowedOrigins = new Set([...configuredOrigins, ...vercelOrigins])
-const localOriginPattern = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/
+const localOriginPattern = /^https?:\/\/(localhost|127\.0\.0\.1|10(?:\.\d{1,3}){3}|192\.168(?:\.\d{1,3}){2}|172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(:\d+)?$/
 
 if (isProduction && (!process.env.JWT_SECRET || process.env.JWT_SECRET.length < 32)) {
   throw new Error('JWT_SECRET must be configured with at least 32 characters in production.')

@@ -56,6 +56,7 @@ MONGODB_DB=eden_flora
 JWT_SECRET=replace-with-a-long-random-secret
 CLIENT_ORIGIN=http://localhost:5173
 APP_URL=http://localhost:5173
+VITE_API_URL=
 GEMINI_API_KEY=optional
 CLOUDINARY_CLOUD_NAME=optional
 CLOUDINARY_UPLOAD_PRESET=optional
@@ -91,6 +92,11 @@ The project is configured as a single Vercel deployment. Vercel builds the Vite 
 Configure these variables in the Vercel project settings:
 
 `MONGODB_URI`, `MONGODB_DB`, `JWT_SECRET`, `CLIENT_ORIGIN`, and `APP_URL`.
+
+For a separate Render frontend and backend, set `VITE_API_URL` on the frontend
+to the backend service URL, and set `CLIENT_ORIGIN` on the backend to the
+frontend service URL. Both values must include `https://` and must not end with
+`/`.
 
 Add `GEMINI_API_KEY`, `CLOUDINARY_CLOUD_NAME`, and `CLOUDINARY_UPLOAD_PRESET` when enabling the optional AI and attachment features.
 
